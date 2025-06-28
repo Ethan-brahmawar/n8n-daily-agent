@@ -1,4 +1,4 @@
-FROM n8nio/n8n:1.42.0-root
+FROM n8nio/n8n:latest-root
 
 # Switch to root
 USER root
