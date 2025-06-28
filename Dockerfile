@@ -1,9 +1,9 @@
-FROM n8nio/n8n:latest-root
+FROM n8nio/n8n:1.42.0-root
 
 # Switch to root
 USER root
 
-# Install system dependencies for Playwright (DEBIAN-compatible now)
+# Install system dependencies for Playwright
 RUN apt-get update && apt-get install -y \
   wget \
   gnupg \
@@ -27,13 +27,13 @@ RUN apt-get update && apt-get install -y \
   libgtk-3-0 \
   && apt-get clean
 
-# Install Playwright with Chromium only (smaller, faster)
+# Install Playwright (Chromium only)
 RUN npm install playwright && npx playwright install chromium --with-deps
 
-# Switch back to node user
+# Return to node user
 USER node
 
-# n8n environment variables
+# n8n env
 ENV N8N_BASIC_AUTH_ACTIVE=true
 ENV N8N_BASIC_AUTH_USER=admin
 ENV N8N_BASIC_AUTH_PASSWORD=changeme
